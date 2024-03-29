@@ -40,9 +40,9 @@ function App() {
               <li>
                 <Link to="/Trading" className="nav-link">Trading</Link>
               </li>
-              <button onClick={toggleDarkMode} className="dark-mode-toggle">
+              {/* <button onClick={toggleDarkMode} className="dark-mode-toggle">
                 <FontAwesomeIcon icon={darkMode ? faSun : faMoon} />
-              </button>
+              </button> */}
             </ul>
           </nav>
         </header>
