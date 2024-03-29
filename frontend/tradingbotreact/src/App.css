@@ -1,0 +1,54 @@
+/* App Header */
+.App-header {
+  background-color: #333;
+  color: white;
+  padding: 10px 0;
+  text-align: center;
+}
+
+/* Navigation */
+.App-nav ul {
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  padding: 0;
+}
+
+.App-nav ul li {
+  margin-right: 20px;
+}
+
+.App-nav ul li:last-child {
+  margin-right: 0;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.nav-link:hover {
+  background-color: #555;
+}
+
+/* Main Content */
+.App-main {
+  padding: 20px;
+}
+
+/* Dark Mode */
+body.dark-mode {
+  background-color: #333;
+  color: white;
+}
+
+.dark-mode-toggle {
+  background-color: transparent;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
