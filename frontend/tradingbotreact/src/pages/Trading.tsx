@@ -2,6 +2,7 @@ import React from 'react';
 import { EuiBasicTable } from '@elastic/eui';
 import '@elastic/eui/dist/eui_theme_light.css'; // Import the light theme
 
+// ** This data will eventually come from users MT5 trading history ** //
 
 const Trading = () => {
   const columns = [
