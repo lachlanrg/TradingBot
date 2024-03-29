@@ -7,9 +7,15 @@
 }
 
 /* Navigation */
-.App-nav ul {
+.App-nav {
   display: flex;
   justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.App-nav ul {
+  display: flex;
   list-style-type: none;
   padding: 0;
 }
@@ -45,10 +51,24 @@ body.dark-mode {
   color: white;
 }
 
+/* Dark Mode Toggle */
 .dark-mode-toggle {
   background-color: transparent;
   color: white;
   border: none;
   cursor: pointer;
+  margin-left: auto;
+}
+
+.light-table {
+  background-color: #f5f5f5; /* Light gray background */
+}
+
+.light-table tbody tr:nth-child(odd) {
+  background-color: #ffffff; /* White background for odd rows */
+}
+
+.light-table tbody tr:nth-child(even) {
+  background-color: #f0f0f0; /* Light gray background for even rows */
 }
 
