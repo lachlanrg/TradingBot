@@ -1,8 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-
-
 import {
   Box,
   Heading,
@@ -22,25 +18,14 @@ const theme = extendTheme({
   },
 });
 
-interface LoginProps {
-  onLogin: () => void;
-  
-}
-
-const Login: React.FC<LoginProps> = ({ onLogin }) => {
+const Signup: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate(); // Declare the navigate function
 
-
-  const handleLogin = () => {
-    // Perform login logic here, such as validating the username and password
-    // For simplicity, always consider login successful for this example
-    onLogin();
-    navigate('/home'); // Navigate to the home page
-
+  const handleSignup = () => {
+    // Perform signup logic here
+    console.log('Perform signup logic');
   };
-
 
   return (
     <ChakraProvider theme={theme}>
@@ -61,7 +46,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
           bg="gray.700" // Set the background color of the login box to a darker shade
         >
           <Heading as="h1" mb={4}>
-            Login
+            Signup
           </Heading>
           <FormControl>
             <FormLabel>Username</FormLabel>
@@ -87,18 +72,13 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
               color="white" // Set the text color of the input to white
             />
           </FormControl>
-          <Button colorScheme="blue" onClick={handleLogin} mr={2}>
-            Login
+          <Button colorScheme="green" onClick={handleSignup}>
+            Signup
           </Button>
-          <Link to="/signup">
-            <Button colorScheme="green" ml={2}>
-              Signup
-            </Button>
-          </Link>
         </Box>
       </Box>
     </ChakraProvider>
   );
 };
 
-export default Login;
+export default Signup;
