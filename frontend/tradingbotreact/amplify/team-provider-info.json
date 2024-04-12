@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-tradingbotauth-staging-c176d-authRole",
+      "UnauthRoleArn": "arn:aws:iam::223985317176:role/amplify-tradingbotauth-staging-c176d-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::223985317176:role/amplify-tradingbotauth-staging-c176d-authRole",
+      "Region": "ap-southeast-2",
+      "DeploymentBucketName": "amplify-tradingbotauth-staging-c176d-deployment",
+      "UnauthRoleName": "amplify-tradingbotauth-staging-c176d-unauthRole",
+      "StackName": "amplify-tradingbotauth-staging-c176d",
+      "StackId": "arn:aws:cloudformation:ap-southeast-2:223985317176:stack/amplify-tradingbotauth-staging-c176d/334bef40-f8a9-11ee-8924-065761371ea7",
+      "AmplifyAppId": "d1vsb0f5b78zc7"
+    },
+    "categories": {
+      "auth": {
+        "TradingBotAuth": {}
+      }
+    }
+  }
+}
