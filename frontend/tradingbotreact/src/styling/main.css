@@ -1,0 +1,40 @@
+/* Login.css */
+.login-container {
+    min-height: 100vh;
+    background-color: #2d3748; /* Dark background color */
+    color: white; /* Text color */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .login-form {
+    max-width: 400px; /* Maximum width of the login form */
+    padding: 20px; /* Padding around the form */
+    border: 1px solid #4a5568; /* Border color */
+    border-radius: 0.375rem; /* Border radius */
+    background-color: #2d3748; /* Dark background color */
+  }
+  
+  .login-form input {
+    background-color: #4a5568; /* Darker background color for inputs */
+    color: white; /* Text color for inputs */
+    border: 1px solid #4a5568; /* Border color for inputs */
+    border-radius: 0.25rem; /* Border radius for inputs */
+    padding: 0.5rem; /* Padding for inputs */
+    margin-bottom: 0.5rem; /* Bottom margin for inputs */
+  }
+  
+  .login-form button {
+    background-color: #2b6cb0; /* Button background color */
+    color: white; /* Button text color */
+    border: none; /* Remove button border */
+    border-radius: 0.25rem; /* Button border radius */
+    padding: 0.5rem 1rem; /* Button padding */
+    cursor: pointer; /* Change cursor to pointer on hover */
+  }
+  
+  .login-form button:hover {
+    background-color: #2c5282; /* Darker background color on hover */
+  }
+  
