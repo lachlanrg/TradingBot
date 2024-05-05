@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-
-
 import {
   Box,
   Heading,
@@ -12,7 +10,10 @@ import {
   FormLabel,
   ChakraProvider,
   extendTheme,
+  Flex,
 } from '@chakra-ui/react';
+
+import { signIn, signOut } from 'aws-amplify/auth'
 
 // Extend the default Chakra UI theme to set the color mode to dark
 const theme = extendTheme({
@@ -28,17 +29,28 @@ interface LoginProps {
 }
 
 const Login: React.FC<LoginProps> = ({ onLogin }) => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate(); // Declare the navigate function
 
+  const handleLogin = async () => {
+    try {
+      await signIn({ username: email, password: password });
+      console.log('Login successful with email:', email);
+      onLogin();
+      navigate('/home'); // Navigate to the home page
+    } catch (error) {
+      console.error('Error signing in:', error);
+    }
+  };
 
-  const handleLogin = () => {
-    // Perform login logic here, such as validating the username and password
-    // For simplicity, always consider login successful for this example
-    onLogin();
-    navigate('/home'); // Navigate to the home page
-
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      // Redirect or perform any additional actions after signout
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
   };
 
 
@@ -60,6 +72,9 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
           borderRadius="lg"
           bg="gray.700" // Set the background color of the login box to a darker shade
         >
+           <Flex justifyContent="flex-end" mb={4} position="absolute" top={0} right={0}>
+            <Button variant="link" onClick={handleSignOut}>Sign Out</Button>
+          </Flex>
           <Heading as="h1" mb={4}>
             Login
           </Heading>
@@ -67,8 +82,8 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
             <FormLabel>Username</FormLabel>
             <Input
               type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your username"
               mb={4}
               bg="gray.600" // Set the background color of the input to a darker shade

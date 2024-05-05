@@ -3,7 +3,7 @@
   "cognitoConfig": {
     "identityPoolName": "testAuthIdentityPool",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "tradin06807e5d",
+    "resourceNameTruncated": "tradin02b3ea87",
     "userPoolName": "TradingBotAuth",
     "autoVerifiedAttributes": [
       "email"
@@ -32,12 +32,15 @@
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [],
     "userpoolClientReadAttributes": [],
-    "userpoolClientLambdaRole": "Tradin06807e5d_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "Tradin02b3ea87_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "06807e5d",
+    "sharedId": "02b3ea87",
     "resourceName": "TradingBotAuth",
     "authSelections": "identityPoolAndUserPool",
     "serviceName": "Cognito",
+    "usernameAttributes": [
+      "email"
+    ],
     "useDefault": "manual",
     "userPoolGroups": false,
     "userPoolGroupList": [],

@@ -11,6 +11,10 @@ import Trading from './pages/Trading';
 import Signup from './pages/SignUp';
 import { useNavigate } from 'react-router-dom';
 
+import { Amplify } from 'aws-amplify';
+import awsconfig from './aws-exports';
+(Amplify as any).configure(awsconfig);
+
 
 // Extend the default Chakra UI theme to set the color mode to dark
 const theme = extendTheme({
@@ -35,57 +39,49 @@ function App() {
 
   const handleLogout = () => {
     setLoggedIn(false);
-    window.location.href = '/login'; // Redirect to the login page
-    // Perform logout logic here, such as clearing session storage
   };
+
 
   return (
     <ChakraProvider theme={theme}>
       <Router>
-      <Box
-        bg="gray.800" // Set the background color of the header to a dark shade
-        color="white" // Set the text color of the header to white
-        p={4} // Set padding for the header
-        textAlign="center" // Align text in the header to the center
-        borderBottom={loggedIn ? "1px solid #333" : "none"}
-        >
         {loggedIn && (
-         <header className="App-header">
-            <nav className="App-nav">
-             <ul style={{ display: 'flex', justifyContent: 'center', listStyleType: 'none', padding: 0 }}>
-                <li style={{ margin: '0 10px' }}>
-                  <Link to="/home" className="nav-link">Home</Link>
-                </li>
-                <li style={{ margin: '0 10px' }}>
-                  <Link to="/profile" className="nav-link">Profile</Link>
-                </li>
-                <li style={{ margin: '0 10px' }}>
-                  <Link to="/trading" className="nav-link">Trading</Link>
-                </li>
-                <li style={{marginLeft: '20px'}}>
-                  <Button variant="link" onClick={handleLogout} className="logout-button">
-                    Logout
-                  </Button>
-                </li>
-              </ul>
-              
-              
-            </nav>
-          </header>
+          <Box
+            bg="gray.800" // Set the background color of the header to a dark shade
+            color="white" // Set the text color of the header to white
+            p={4} // Set padding for the header
+            textAlign="center" // Align text in the header to the center
+            borderBottom="1px solid #333"
+          >
+            <header className="App-header">
+              <nav className="App-nav">
+                <ul style={{ display: 'flex', justifyContent: 'center', listStyleType: 'none', padding: 0 }}>
+                  <li style={{ margin: '0 10px' }}>
+                    <Link to="/home" className="nav-link">Home</Link>
+                  </li>
+                  <li style={{ margin: '0 10px' }}>
+                    <Link to="/profile" className="nav-link">Profile</Link>
+                  </li>
+                  <li style={{ margin: '0 10px' }}>
+                    <Link to="/trading" className="nav-link">Trading</Link>
+                  </li>
+                  
+                </ul>
+              </nav>
+            </header>
+          </Box>
         )}
-      </Box>
-        
-      <main className="App-main">
+
+        <main className="App-main">
           <Routes>
             <Route path="/" element={<Navigate to="/login" />} />
             <Route path="/home" element={<Home />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile" element={<Profile onLogout={handleLogout} />} />
             <Route path="/trading" element={<Trading />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login onLogin={handleLogin} />} />
           </Routes>
         </main>
-
       </Router>
     </ChakraProvider>
   );
