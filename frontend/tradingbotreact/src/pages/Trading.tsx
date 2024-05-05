@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Heading, Text, ChakraProvider, extendTheme, Divider, List, ListItem, ListIcon, Flex, Center } from '@chakra-ui/react';
+import { Box, Heading, Text, ChakraProvider, extendTheme, Divider, Table, Thead, Tbody, Tr, Th, Td, Center } from '@chakra-ui/react';
 import { MdCheckCircle } from 'react-icons/md';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 // Extend the default Chakra UI theme to set the color mode to dark
 const theme = extendTheme({
@@ -15,15 +14,20 @@ const Trading: React.FC = () => {
   const [tradingInfo, setTradingInfo] = useState<any>({
     accountBalance: 10000,
     openPositions: [
-      { symbol: 'AAPL', quantity: 100, price: 150.25 },
-      { symbol: 'MSFT', quantity: 50, price: 250.75 }
+      { id: 1, symbol: 'AAPL', quantity: 100, price: 150.25 },
+      { id: 2, symbol: 'MSFT', quantity: 50, price: 250.75 },
+      // Add more open positions
+      { id: 3, symbol: 'GOOGL', quantity: 75, price: 2700.50 },
+      { id: 4, symbol: 'AMZN', quantity: 25, price: 3300.25 },
     ],
     orderHistory: [
-      { symbol: 'AAPL', quantity: 50, price: 151.50, type: 'Buy' },
-      { symbol: 'MSFT', quantity: 25, price: 252.00, type: 'Buy' }
+      { id: 1, symbol: 'AAPL', quantity: 50, price: 151.50, type: 'Buy' },
+      { id: 2, symbol: 'MSFT', quantity: 25, price: 252.00, type: 'Buy' },
+      // Add more order history
+      { id: 3, symbol: 'AAPL', quantity: 25, price: 160.75, type: 'Sell' },
+      { id: 4, symbol: 'MSFT', quantity: 10, price: 255.50, type: 'Buy' },
     ]
   });
-
   useEffect(() => {
     // Make the fetch call when the component mounts
     fetch('http://127.0.0.1', {
@@ -43,27 +47,17 @@ const Trading: React.FC = () => {
     });
   }, []); // Empty array ensures the effect runs only once when the component mounts
 
-  // Mock data for the line chart
-  const chartData = [
-    { date: '2024-01-01', value: 100 },
-    { date: '2024-01-02', value: 200 },
-    { date: '2024-01-03', value: 150 },
-    { date: '2024-01-04', value: 300 },
-    { date: '2024-01-05', value: 400 },
-  ];
-
   return (
     <ChakraProvider theme={theme}>
       <Box
-        minH="100vh" // Set the minimum height of the box to the height of the viewport
-        bg="gray.800" // Set the background color to a dark shade
-        color="white" // Set the text color to white
+        minH="100vh"
+        bg="gray.800"
+        color="white"
         p={8}
-
       >
         <Center>
-          <Heading as="h1" mb={50} mt={4} >
-            Trading Dashboard
+          <Heading as="h1" mb={50} mt={4}>
+            Trading History
           </Heading>
         </Center>
         <Text fontSize="xl" mb={4}>
@@ -73,51 +67,47 @@ const Trading: React.FC = () => {
         <Text fontSize="xl" mt={4} mb={2}>
           Open Positions
         </Text>
-        <List spacing={3}>
-          {tradingInfo.openPositions.map((position: any, index: number) => (
-            <ListItem key={index}>
-              <Flex alignItems="center">
-                <ListIcon as={MdCheckCircle} color="green.500" />
-                <Text>
-                  {position.symbol} - Quantity: {position.quantity}, Price: ${position.price}
-                </Text>
-              </Flex>
-            </ListItem>
-          ))}
-        </List>
-        <Divider mt={4} />
-        <Text fontSize="xl" mt={4} mb={2}>
+        <Table variant="simple">
+          <Thead>
+            <Tr>
+              <Th>Symbol</Th>
+              <Th>Quantity</Th>
+              <Th>Price</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {tradingInfo.openPositions.map((position: any) => (
+              <Tr key={position.id}>
+                <Td>{position.symbol}</Td>
+                <Td>{position.quantity}</Td>
+                <Td>${position.price}</Td>
+              </Tr>
+            ))}
+          </Tbody>
+        </Table>
+        <Text fontSize="xl" mt={4} mb={2} marginTop={(20)}>
           Order History
         </Text>
-        <List spacing={3}>
-          {tradingInfo.orderHistory.map((order: any, index: number) => (
-            <ListItem key={index}>
-              <Flex alignItems="center">
-                <ListIcon as={MdCheckCircle} color="green.500" />
-                <Text>
-                  {order.type} {order.symbol} - Quantity: {order.quantity}, Price: ${order.price}
-                </Text>
-              </Flex>
-            </ListItem>
-          ))}
-        </List>
-        <Divider mt={20} />
-        <Text fontSize="xl" mt={20} mb={2}>
-          Revenue Chart
-        </Text>
-        <ResponsiveContainer width="100%" height={400}>
-          <LineChart
-            data={chartData}
-            margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="date" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Line type="monotone" dataKey="value" stroke="#8884d8" />
-          </LineChart>
-        </ResponsiveContainer>
+        <Table variant="simple">
+          <Thead>
+            <Tr>
+              <Th>Type</Th>
+              <Th>Symbol</Th>
+              <Th>Quantity</Th>
+              <Th>Price</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {tradingInfo.orderHistory.map((order: any) => (
+              <Tr key={order.id} color={order.type === 'Buy' ? 'green' : 'red'}>
+                <Td>{order.type}</Td>
+                <Td>{order.symbol}</Td>
+                <Td>{order.quantity}</Td>
+                <Td>${order.price}</Td>
+              </Tr>
+            ))}
+          </Tbody>
+        </Table>
       </Box>
     </ChakraProvider>
   );

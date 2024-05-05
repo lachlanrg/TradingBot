@@ -9,6 +9,7 @@ import Home from './pages/Home';
 import Profile from './pages/Profile';
 import Trading from './pages/Trading';
 import Signup from './pages/SignUp';
+import Analysis from './pages/Analysis'
 import { useNavigate } from 'react-router-dom';
 
 import { Amplify } from 'aws-amplify';
@@ -60,10 +61,13 @@ function App() {
                     <Link to="/home" className="nav-link">Home</Link>
                   </li>
                   <li style={{ margin: '0 10px' }}>
-                    <Link to="/profile" className="nav-link">Profile</Link>
+                    <Link to="/trading" className="nav-link">Trades</Link>
                   </li>
                   <li style={{ margin: '0 10px' }}>
-                    <Link to="/trading" className="nav-link">Trading</Link>
+                    <Link to="/analysis" className="nav-link">Analysis</Link>
+                  </li>
+                  <li style={{ margin: '0 10px' }}>
+                    <Link to="/profile" className="nav-link">Profile</Link>
                   </li>
                   
                 </ul>
@@ -76,8 +80,9 @@ function App() {
           <Routes>
             <Route path="/" element={<Navigate to="/login" />} />
             <Route path="/home" element={<Home />} />
-            <Route path="/profile" element={<Profile onLogout={handleLogout} />} />
             <Route path="/trading" element={<Trading />} />
+            <Route path="/analysis" element={<Analysis />} />
+            <Route path="/profile" element={<Profile onLogout={handleLogout} />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login onLogin={handleLogin} />} />
           </Routes>

@@ -46,6 +46,10 @@
   background-color: #555;
 }
 
+.active-link {
+  text-decoration: underline;
+}
+
 /* Main Content */
 
 .App-main {

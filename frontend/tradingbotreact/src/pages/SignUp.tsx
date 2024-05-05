@@ -31,6 +31,7 @@ const Signup: React.FC = () => {
   const [username, setUsername] = React.useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [confirmationCode, setConfirmationCode] = React.useState('');
   const [isConfirmationStep, setIsConfirmationStep] = React.useState(false);
   const navigate = useNavigate(); // Declare the navigate function
@@ -38,16 +39,20 @@ const Signup: React.FC = () => {
 
   const handleSignup = async () => {
     try {
+      if (password !== confirmPassword) {
+        alert('Passwords do not match');
+        return;
+      }
+
       console.log('Attempting sign up with email:', email, 'and password:', password);
       await signUp({
         username: email,
         password: password,
       });
-      console.log('Signup successful. User:', email); // Log the username
-      setIsConfirmationStep(true); 
+      console.log('Signup successful');
+      setIsConfirmationStep(true);
     } catch (error) {
       console.error('Error signing up:', error);
-      console.error('Signup details: ', email, password); // Log signup details for analysis
     }
   };
 
@@ -145,6 +150,18 @@ const Signup: React.FC = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter your password"
+                  mb={4}
+                  bg="gray.600" // Set the background color of the input to a darker shade
+                  color="white" // Set the text color of the input to white
+                />
+              </FormControl>
+              <FormControl>
+                <FormLabel>Confirm Password</FormLabel>
+                <Input
+                  type="password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  placeholder="Confirm your password"
                   mb={4}
                   bg="gray.600" // Set the background color of the input to a darker shade
                   color="white" // Set the text color of the input to white
