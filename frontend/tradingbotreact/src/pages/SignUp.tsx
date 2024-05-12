@@ -1,4 +1,3 @@
-// SignUp.tsx
 import React, { useState } from 'react';
 import {
   Box,
@@ -9,14 +8,13 @@ import {
   FormLabel,
   ChakraProvider,
   extendTheme,
+  Flex,
+  Text,
 } from '@chakra-ui/react';
-import { signUp, signIn, resendSignUpCode } from 'aws-amplify/auth'; // Import Auth from aws-amplify
-import { useNavigate } from 'react-router-dom';
-import { confirmSignUp, type ConfirmSignUpInput } from 'aws-amplify/auth';
+import { signUp, resendSignUpCode } from 'aws-amplify/auth'; 
+import { useNavigate, Link } from 'react-router-dom';
+import { confirmSignUp } from 'aws-amplify/auth';
 import { autoSignIn } from 'aws-amplify/auth';
-
-
-import { Link } from 'react-router-dom';
 
 // Extend the default Chakra UI theme to set the color mode to dark
 const theme = extendTheme({
@@ -26,7 +24,6 @@ const theme = extendTheme({
   },
 });
 
-
 const Signup: React.FC = () => {
   const [username, setUsername] = React.useState('');
   const [email, setEmail] = useState('');
@@ -34,8 +31,7 @@ const Signup: React.FC = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [confirmationCode, setConfirmationCode] = React.useState('');
   const [isConfirmationStep, setIsConfirmationStep] = React.useState(false);
-  const navigate = useNavigate(); // Declare the navigate function
-
+  const navigate = useNavigate(); 
 
   const handleSignup = async () => {
     try {
@@ -43,7 +39,6 @@ const Signup: React.FC = () => {
         alert('Passwords do not match');
         return;
       }
-
       console.log('Attempting sign up with email:', email, 'and password:', password);
       await signUp({
         username: email,
@@ -56,27 +51,22 @@ const Signup: React.FC = () => {
     }
   };
 
-
   const handleConfirmation = async () => {
     try {
       console.log('Confirming sign up with username:', email, 'and confirmation code:', confirmationCode);
-      console.log('Values before confirmation', username, confirmationCode); // Check values
-
+      console.log('Values before confirmation', username, confirmationCode); 
       await confirmSignUp({
         username,
-        confirmationCode, 
+        confirmationCode,
       });
-
-      console.log('Confirmation successful'); // Indicate success
-
+      console.log('Confirmation successful');
       await handleAutoSignIn();
       await navigate('/home'); 
-
-      console.log('Sign up confirmed for user:', email); 
-      setIsConfirmationStep(false); 
+      console.log('Sign up confirmed for user:', email);
+      setIsConfirmationStep(false);
     } catch (error: any) {
       console.error('Error confirming sign up:', error);
-      console.error('Confirmation details: ', username, confirmationCode); // Log confirmation details
+      console.error('Confirmation details: ', username, confirmationCode); 
     }
   };
 
@@ -84,7 +74,7 @@ const Signup: React.FC = () => {
     try {
       console.log('Attempting auto sign-in');
       await autoSignIn();
-      console.log('Auto sign-in successful'); // Indicate success
+      console.log('Auto sign-in successful'); 
     } catch (error) {
       console.error('Auto sign-in error:', error);
     }
@@ -93,20 +83,20 @@ const Signup: React.FC = () => {
   return (
     <ChakraProvider theme={theme}>
       <Box
-        minH="100vh" // Set the minimum height of the box to the height of the viewport
-        bg="gray.800" // Set the background color to a dark shade
-        color="white" // Set the text color to white
+        minH="100vh" 
+        bg="gray.800" 
+        color="white" 
         display="flex"
         alignItems="center"
         justifyContent="center"
       >
         <Box
-          width="350px" // Set the maximum width of the box
+          width="350px" 
           mx="auto"
           p={8}
           borderWidth="1px"
           borderRadius="lg"
-          bg="gray.700" // Set the background color of the login box to a darker shade
+          bg="gray.700" 
         >
           <Heading as="h1" mb={4}>
             Signup
@@ -118,11 +108,11 @@ const Signup: React.FC = () => {
                 <Input
                   type="text"
                   value={confirmationCode}
-                  onChange={(e) => setConfirmationCode(e.target.value)} // Correct
+                  onChange={(e) => setConfirmationCode(e.target.value)}
                   placeholder="Enter confirmation code"
                   mb={4}
-                  bg="gray.600" // Set the background color of the input to a darker shade
-                  color="white" // Set the text color of the input to white
+                  bg="gray.600" 
+                  color="white"
                 />
               </FormControl>
               <Button colorScheme="green" onClick={handleConfirmation}>
@@ -132,15 +122,15 @@ const Signup: React.FC = () => {
           ) : (
             <>
               <FormControl>
-                <FormLabel>Username</FormLabel>
+                <FormLabel>Email</FormLabel>
                 <Input
                   type="text"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
                   mb={4}
-                  bg="gray.600" // Set the background color of the input to a darker shade
-                  color="white" // Set the text color of the input to white
+                  bg="gray.600" 
+                  color="white" 
                 />
               </FormControl>
               <FormControl>
@@ -151,8 +141,8 @@ const Signup: React.FC = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter your password"
                   mb={4}
-                  bg="gray.600" // Set the background color of the input to a darker shade
-                  color="white" // Set the text color of the input to white
+                  bg="gray.600" 
+                  color="white" 
                 />
               </FormControl>
               <FormControl>
@@ -163,15 +153,25 @@ const Signup: React.FC = () => {
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="Confirm your password"
                   mb={4}
-                  bg="gray.600" // Set the background color of the input to a darker shade
-                  color="white" // Set the text color of the input to white
+                  bg="gray.600" 
+                  color="white" 
                 />
               </FormControl>
-              <Button colorScheme="green" onClick={handleSignup}>
+              <Button mt={5} colorScheme="green" onClick={handleSignup} width="100%">
                 Signup
               </Button>
             </>
           )}
+
+          {/* Back to Login Link */}
+          <Flex justifyContent="center" mt={4}>
+            <Text fontSize="xs">
+              Already have an account? {' '}
+              <Link to="/login">
+                <strong>Back to Login</strong> 
+              </Link>
+            </Text>
+          </Flex>
         </Box>
       </Box>
     </ChakraProvider>

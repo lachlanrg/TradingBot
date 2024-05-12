@@ -42,6 +42,11 @@
   transition: background-color 0.3s;
 }
 
+.nav-link.active {
+  font-weight: bold; /* Make the active link bold */
+  color: #f00;  /* Change the color of the active link to red */
+}
+
 .nav-link:hover {
   background-color: #555;
 }
