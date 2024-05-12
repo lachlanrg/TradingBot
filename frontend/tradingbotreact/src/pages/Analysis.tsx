@@ -99,7 +99,7 @@ const Analysis: React.FC = () => {
         <Divider mb={6} />
 
         <Text fontSize="xl" mb={2}>
-          Revenue Chart
+          Profit/Loss Total
         </Text>
         <ResponsiveContainer width="100%" height={300}>
           <LineChart
@@ -118,7 +118,7 @@ const Analysis: React.FC = () => {
         <Divider mb={6} />
 
         <Text fontSize="xl" mb={2}>
-          Bar Chart
+          Holding Size
         </Text>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart

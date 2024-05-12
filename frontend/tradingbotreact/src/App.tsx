@@ -56,7 +56,7 @@ function App() {
               <nav className="App-nav">
                 <ul style={{ display: 'flex', justifyContent: 'center', listStyleType: 'none', padding: 0 }}>
                   <li style={{ margin: '0 10px' }}>
-                    <NavLink to="/home">Home</NavLink> 
+                    <NavLink to="/home">Dashboard</NavLink> 
                   </li>
                   <li style={{ margin: '0 10px' }}>
                     <NavLink to="/trading">Trades</NavLink>

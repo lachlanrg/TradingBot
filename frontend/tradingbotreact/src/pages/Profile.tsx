@@ -73,17 +73,17 @@ const Profile: React.FC<{ onLogout: () => void }> = ({ onLogout }) => {
         // justifyContent="center"
         p={8}
       >
-        <Heading as="h1" mb={4} mt={200}>
+        <Heading as="h1" mb={10} mt={20}>
           Profile
         </Heading>
         {userInfo && (
         <Box>
-          <Text>User ID: {userInfo.userId}</Text>
-          <Text>Sign In Details: {JSON.stringify(userInfo.signInDetails)}</Text>
-          {email && <Text>Email: {email}</Text>}
+          <Text padding={1}><strong> User ID: </strong> {userInfo.userId}</Text>
+          <Text padding={1}><strong> Sign In Details: </strong>{JSON.stringify(userInfo.signInDetails)}</Text>
+          {email && <Text padding={1}><strong>Email: </strong> {email}</Text>}
         </Box>
       )}
-        <Button mt={4} onClick={handleSignOut}>
+        <Button mt={20} onClick={handleSignOut}>
           Sign Out
         </Button>
       </Box>
