@@ -46,7 +46,7 @@ function App() {
         {/* Router context is here now */}
         {loggedIn && (
           <Box
-            bg="gray.800" 
+            bg="gray.900" 
             color="white" 
             p={4} 
             textAlign="center" 
@@ -54,7 +54,7 @@ function App() {
           >
             <header className="App-header">
               <nav className="App-nav">
-                <ul style={{ display: 'flex', justifyContent: 'center', listStyleType: 'none', padding: 0 }}>
+                <ul style={{ display: 'flex', justifyContent: 'center', listStyleType: 'none', padding: 0}}>
                   <li style={{ margin: '0 10px' }}>
                     <NavLink to="/home">Dashboard</NavLink> 
                   </li>

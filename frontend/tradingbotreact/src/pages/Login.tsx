@@ -65,13 +65,24 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
 
   return (
     <ChakraProvider theme={theme}>
+       <Heading 
+          as="h1" 
+          fontSize="4xl"
+          textAlign="center"
+          bg="gray.800" 
+          color="white" 
+          paddingTop={10}        
+          >
+          Stonks Trading Bot
+        </Heading>
       <Box
-        minH="100vh" 
+        minH="90vh" 
         bg="gray.800" 
         color="white" 
         display="flex"
         alignItems="center"
         justifyContent="center"
+        paddingBottom={2}
       >
         <Box
           width="350px" 
